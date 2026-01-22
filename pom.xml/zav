@@ -1,0 +1,21 @@
+<!-- Для работы с JSON -->
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.10.1</version>
+</dependency>
+
+<!-- Для работы с YAML -->
+<dependency>
+    <groupId>org.yaml</groupId>
+    <artifactId>snakeyaml</artifactId>
+    <version>2.2</version>
+</dependency>
+
+<!-- Для параметризованных тестов -->
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-params</artifactId>
+    <version>5.10.0</version>
+    <scope>test</scope>
+</dependency>
