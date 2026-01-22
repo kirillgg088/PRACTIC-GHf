@@ -1,0 +1,73 @@
+{
+  "testScenarios": [
+    {
+      "id": 1,
+      "name": "Поиск и добавление в корзину",
+      "description": "Поиск товара по названию и добавление в корзину",
+      "steps": [
+        {
+          "action": "open_url",
+          "params": ["${base.url}"]
+        },
+        {
+          "action": "search_product",
+          "params": ["футболка мужская черная"]
+        },
+        {
+          "action": "select_first_product",
+          "params": []
+        },
+        {
+          "action": "add_to_cart",
+          "params": []
+        },
+        {
+          "action": "verify_cart_count",
+          "params": ["1"]
+        }
+      ],
+      "expectedResult": "Товар успешно добавлен в корзину"
+    },
+    {
+      "id": 2,
+      "name": "Поиск по категории",
+      "description": "Поиск товаров в определенной категории",
+      "steps": [
+        {
+          "action": "open_url",
+          "params": ["${base.url}/catalog/elektronika"]
+        },
+        {
+          "action": "verify_page_title",
+          "params": ["Электроника"]
+        },
+        {
+          "action": "apply_filter",
+          "params": ["price", "asc"]
+        },
+        {
+          "action": "verify_results_count",
+          "params": [">10"]
+        }
+      ],
+      "expectedResult": "Отображены товары в категории Электроника"
+    }
+  ],
+  "testUsers": [
+    {
+      "id": "user1",
+      "searchQuery": "ноутбук asus",
+      "expectedMinResults": 5
+    },
+    {
+      "id": "user2",
+      "searchQuery": "кроссовки nike",
+      "expectedMinResults": 10
+    },
+    {
+      "id": "user3",
+      "searchQuery": "книга программирование",
+      "expectedMinResults": 3
+    }
+  ]
+}
