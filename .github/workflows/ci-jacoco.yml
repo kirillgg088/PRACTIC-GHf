@@ -1,0 +1,54 @@
+name: Java CI with JaCoCo
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: Build with Maven
+      run: mvn clean compile
+      
+    - name: Run unit tests with JaCoCo
+      run: mvn test jacoco:report
+      
+    - name: Verify test coverage
+      run: |
+        # Проверяем покрытие кода (минимум 80%)
+        COVERAGE=$(grep -oP 'class="percent">\K[0-9]+' target/site/jacoco/index.html | head -1)
+        echo "Coverage: $COVERAGE%"
+        if [ $COVERAGE -lt 80 ]; then
+          echo "❌ Покрытие кода менее 80%"
+          exit 1
+        fi
+        echo "✅ Покрытие кода: $COVERAGE%"
+        
+    - name: Upload JaCoCo report
+      uses: actions/upload-artifact@v3
+      with:
+        name: jacoco-report
+        path: target/site/jacoco/
+        retention-days: 7
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-reports
+        path: target/surefire-reports/
+        retention-days: 7
