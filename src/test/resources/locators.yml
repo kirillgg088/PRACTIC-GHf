@@ -1,0 +1,26 @@
+# YAML файл с локаторами элементов
+elements:
+  header:
+    logo: ".header__logo"
+    searchInput: "#searchInput"
+    searchButton: "button[data-wba-header-name='Search']"
+    cartButton: ".navbar-pc__icon--basket"
+    profileButton: ".j-main-login"
+  
+  product:
+    card: ".product-card"
+    title: ".product-card__name"
+    price: ".price__lower-price"
+    addToCart: ".product-card__add-basket"
+    addToFavorite: ".product-card__like"
+  
+  cart:
+    counter: ".navbar-pc__notify"
+    itemsList: ".basket-section__list"
+    itemName: ".basket-section__item-name"
+    totalPrice: ".basket-section__total-price"
+  
+  messages:
+    success: ".notification_success"
+    error: ".notification_error"
+    warning: ".notification_warning"
